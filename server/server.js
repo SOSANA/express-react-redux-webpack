@@ -52,7 +52,7 @@ if (process.env.NODE_ENV === 'production') {
 // start app
 app.listen(serverConfig.port, (err) => {
   if (!err) {
-    console.log(`Server listening on: ${serverConfig.port}!`); // eslint-disable-line
+    console.log(`Server listening on http://localhost:${serverConfig.port}`); // eslint-disable-line
   }
 });
 

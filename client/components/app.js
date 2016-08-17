@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
 
+const h3Style = {
+  textAlign: 'center',
+};
+
 export default class App extends Component { // eslint-disable-line
   render() {
     return (
       <div>
-        React simple starter
+        <h3 style={h3Style}>Express, React, Redux, and Webpack Starter App</h3>
         {this.props.children}
       </div>
     );

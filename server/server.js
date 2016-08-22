@@ -3,6 +3,7 @@ import Express from 'express';
 import path from 'path';
 import logger from 'morgan';
 import bodyParser from 'body-parser';
+import favicon from 'serve-favicon';
 import serverConfig from './config/serverConfig';
 
 // Webpack Requirements
@@ -21,6 +22,7 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(Express.static(path.join(__dirname, '../public')));
+app.use(favicon(path.join(__dirname, '../public/img/favicon.ico')));
 
 // webpack development setup
 const compiler = webpack(webpackConfig);

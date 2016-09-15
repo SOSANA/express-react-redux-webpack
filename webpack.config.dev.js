@@ -1,10 +1,12 @@
 import path from 'path';
 import webpack from 'webpack';
+import autoprefixer from 'autoprefixer';
 
 const PATHS = {
   app: path.join(__dirname, 'client/main.js'),
   build: path.join(__dirname, 'public', 'js'),
   style: path.join(__dirname, 'public', 'css'),
+  images: path.join(__dirname, 'public', 'img'),
 };
 
 const webpackConfig = {
@@ -27,7 +29,7 @@ const webpackConfig = {
     new webpack.NoErrorsPlugin(),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify('development')
-    })
+    }),
   ],
   module: {
     loaders: [
@@ -38,10 +40,21 @@ const webpackConfig = {
       },
       {
         test: /\.css$/,
-        loaders: ['style', 'css'],
+        loaders: ['style', 'css', 'postcss'],
         include: PATHS.style,
-      }
+      },
+      { test : /\.(jpg|png)$/,
+        loader : 'url?limit=10000',
+        include : PATHS.images,
+      },
+      { test : /\.(jpg|png)$/,
+        loader : 'file?name=[path][name].[hash].[ext]',
+        include : PATHS.images,
+      },
     ]
+  },
+  postcss: () => {
+        return [autoprefixer];
   }
 };
 
